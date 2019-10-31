@@ -15,4 +15,9 @@ class Hairdresser extends Model
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
+
+    public function hairlink()
+    {
+        return $this->hasMany('App\Hairlink', 'hairdresser_id', 'id');
+    }
 }

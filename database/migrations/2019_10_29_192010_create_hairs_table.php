@@ -15,7 +15,8 @@ class CreateHairsTable extends Migration
     {
         Schema::create('hairdressers', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('order_id');
+            $table->binary('photo')->nullable();
+            $table->text('bio')->nullable();
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
@@ -29,6 +30,14 @@ class CreateHairsTable extends Migration
             $table->unsignedInteger('hairdresser_id');
             $table->timestamps();
         });
+
+        Schema::create('hairlinks', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('hairstyle_id');
+            $table->foreign('hairstyle_id')->references('id')->on('hairstyles')->onDelete('cascade');
+            $table->unsignedInteger('hairdresser_id');
+            $table->foreign('hairdresser_id')->references('id')->on('hairdressers')->onDelete('cascade');
+        });
     }
 
     /**
@@ -40,5 +49,6 @@ class CreateHairsTable extends Migration
     {
         Schema::dropIfExists('hairdresser');
         Schema::dropIfExists('hairstyle');
+        Schema::dropIfExists('hairlink');
     }
 }

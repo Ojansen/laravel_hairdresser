@@ -17,6 +17,7 @@ class CreateOrderTable extends Migration
             $table->increments('id');
             $table->dateTime('date');
             $table->text('description')->nullable();
+            $table->unsignedInteger('hairdresser_id');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
