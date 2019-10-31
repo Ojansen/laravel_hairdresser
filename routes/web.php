@@ -16,10 +16,12 @@ Auth::routes();
 Route::redirect('/', '/dashboard');
 
 Route::group(['middleware' => ['web']], function () {
-    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+    Route::get('/dashboard', 'HomeController@Index')->name('dashboard');
 
     Route::match(['get', 'post'], '/profile', 'UserController@Profile')->name('profile');
     Route::post('/profile/password', 'UserController@ChangePassword');
 
     Route::match(['get', 'post'], '/order', 'OrderController@NewOrder');
+
+    Route::get('/admin', 'AdminController@Index')->name('admin-index');
 });

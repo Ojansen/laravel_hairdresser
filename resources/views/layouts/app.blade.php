@@ -55,6 +55,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    @role('superadministrator', 'administrator', 'kapper')
+                                    <a class="dropdown-item" href="{{ route('admin-index') }}">Admin</a>
+                                    <div class="dropdown-divider"></div>
+                                    @endrole
                                     <a class="dropdown-item" href="/profile">Profile</a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
