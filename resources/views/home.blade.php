@@ -17,7 +17,7 @@
                     @foreach($user->order as $item)
                     <tr>
                         <td>{{ Carbon\Carbon::parse($item->date)->format('d-m-Y') }}</td>
-                        <td>{{ Carbon\Carbon::parse($item->date)->format('H:m') }}</td>
+                        <td>{{ Carbon\Carbon::parse($item->date)->format('H:i') }}</td>
                         <td>{{ $item->description }}</td>
                         <td><a class="btn btn-outline-info" href="#">Cancel</a> </td>
                     </tr>

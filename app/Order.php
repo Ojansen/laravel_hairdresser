@@ -10,4 +10,9 @@ class Order extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+    public function scopeCheckAvail($query, $hairdresser = null)
+    {
+        return $query->where('hairdresser_id', $hairdresser)->get();
+    }
+
 }
