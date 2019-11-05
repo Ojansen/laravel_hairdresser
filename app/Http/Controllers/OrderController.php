@@ -24,24 +24,29 @@ class OrderController extends Controller
         }
     }
 
-    public function CreateOrder(Request $request, $hairdresser)
+    public function CreateOrder(Request $request, $hairdresser=null, $date=null)
     {
-        $avail = Order::CheckAvail($hairdresser);
+        $times = $this->CheckTime($hairdresser, $date);
         if($request->isMethod('post')) {
-//            $choice = Hairdresser::find($hairdresser);
-//            dd($avail->first()->date);
-
+            return response()->json([$times]);
         } elseif($request->isMethod('get')) {
-            $times = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00'];
-            $unavail_times = [];
-            foreach ($avail as $item) {
-                array_push($unavail_times, Carbon::parse($item->date)->format('H:i'));
-            }
-            for ($i = 0; $i < count($unavail_times); $i++) {
-                unset($times[array_search($unavail_times[$i], $times)]);
-            }
-//            dump($times, $unavail_times);
-            return view('order.create_order', compact('times'));
+//            dd($times);
+            return view('order.create_order', compact('times', 'hairdresser'));
         }
+    }
+    private function CheckTime($hairdresser, $date)
+    {
+        $avail = Order::where('hairdresser_id', '=', $hairdresser)->where('date', '=', $date)->get();
+        $times = collect(['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00']);
+        $unavail_times = [];
+
+        foreach ($avail as $item) {
+            array_push($unavail_times, Carbon::parse($item->time)->format('H:i'));
+        }
+        for ($i = 0; $i < count($unavail_times); $i++) {
+            unset($times[array_search($unavail_times[$i], $times->toArray())]);
+        }
+
+        return $times;
     }
 }

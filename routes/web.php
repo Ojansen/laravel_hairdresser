@@ -22,7 +22,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/profile/password', 'UserController@ChangePassword');
 
     Route::match(['get', 'post'], '/order', 'OrderController@NewOrder');
-    Route::match(['get', 'post'], '/order/{hairdresser}', 'OrderController@CreateOrder');
+    Route::match(['get', 'post'], '/order/{hairdresser?}/{date?}', 'OrderController@CreateOrder');
 
     Route::get('/admin', 'AdminController@Index')->name('admin-index');
 });
