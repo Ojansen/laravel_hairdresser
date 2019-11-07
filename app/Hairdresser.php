@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Console\Presets\None;
+use PhpParser\Builder;
 
 class Hairdresser extends Model
 {
