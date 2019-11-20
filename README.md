@@ -26,10 +26,10 @@ In your ``.env`` file you should edit the following to mach this:
 
 DB_CONNECTION=mysql<br>
 DB_HOST=127.0.0.1<br>
-DB_PORT=3306<br>  
-DB_DATABASE=hairdresser<br>  
-DB_USERNAME=root<br>  
-DB_PASSWORD=<br>  
+DB_PORT=3306<br>
+DB_DATABASE=hairdresser<br>
+DB_USERNAME=root<br>
+DB_PASSWORD=<br>
 
 then run the migration like so  
 ``php artisan migrate --seed``
